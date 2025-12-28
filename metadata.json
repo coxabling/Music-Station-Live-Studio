@@ -1,5 +1,7 @@
 {
   "name": "Music Station Live: Internet Radio Platform",
   "description": "Music Station Live is a managed platform for internet radio stations that bundles reliable stream hosting, beautiful station websites, professional radio imaging (jingles, sweepers, IDs), and AI tools (auto-DJ, voice skins, automated editing, content suggestions). The goal: let stations go from zero → live in under an hour, then scale to millions of listeners with apps, monetization and full creative support.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [
+    "microphone"
+  ]
 }

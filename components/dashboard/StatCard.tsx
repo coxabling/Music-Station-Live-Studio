@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 interface StatCardProps {
@@ -13,19 +14,24 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, change, changeType, i
   const changeColor = changeType ? (isIncrease ? 'text-green-400' : 'text-red-400') : 'text-gray-400';
 
   return (
-    <div className="bg-gray-800/50 p-5 rounded-lg border border-gray-700/50 shadow-lg flex items-center space-x-4">
-      <div className="flex-shrink-0 h-12 w-12 rounded-md bg-primary-600/20 text-primary-400 flex items-center justify-center">
-        <Icon className="h-6 w-6" />
-      </div>
-      <div>
-        <p className="text-sm font-medium text-gray-400 truncate">{title}</p>
-        <div className="flex items-baseline space-x-2">
-            <p className="text-2xl font-semibold text-white">{value}</p>
-            {change && (
-                <p className={`text-sm font-semibold ${changeColor} flex items-center`}>
-                     {isIncrease ? '▲' : '▼'} {change}
-                </p>
-            )}
+    <div className="bg-gray-800/60 p-6 rounded-2xl border border-gray-700/50 shadow-lg relative group hover:bg-gray-800 transition-all duration-300 overflow-hidden">
+      {/* Decorative glow */}
+      <div className="absolute -top-12 -right-12 h-32 w-32 bg-primary-500/10 blur-[40px] rounded-full group-hover:bg-primary-500/20 transition-all"></div>
+      
+      <div className="flex items-center space-x-4 relative z-10">
+        <div className="flex-shrink-0 h-12 w-12 rounded-xl bg-primary-600/10 text-primary-400 flex items-center justify-center border border-primary-500/20 shadow-inner group-hover:scale-110 transition-transform">
+          <Icon className="h-6 w-6" />
+        </div>
+        <div className="flex-1">
+          <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{title}</p>
+          <div className="flex items-baseline space-x-2 mt-0.5">
+              <p className="text-2xl font-black text-white">{value}</p>
+              {change && (
+                  <p className={`text-xs font-bold ${changeColor} flex items-center bg-gray-900/40 px-1.5 py-0.5 rounded`}>
+                       {isIncrease ? '▲' : '▼'} {change}
+                  </p>
+              )}
+          </div>
         </div>
       </div>
     </div>
