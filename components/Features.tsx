@@ -6,57 +6,78 @@ interface Feature {
   name: string;
   description: string;
   icon: React.ElementType;
+  className?: string;
 }
 
 const features: Feature[] = [
   {
-    name: 'Streaming & Hosting',
-    description: 'Managed Icecast/Shoutcast endpoints, scalable CDN, auto-failover, and detailed listener analytics.',
+    name: 'Streaming Cloud',
+    description: 'Ultra-low latency Icecast hosting with global edge delivery and auto-failover protection.',
     icon: StreamingIcon,
+    className: 'md:col-span-2'
   },
   {
-    name: 'Station Websites',
-    description: 'Modern, responsive templates with a built-in CMS, embedded players, and podcast feed generators.',
-    icon: WebsiteIcon,
-  },
-  {
-    name: 'Radio Imaging & Creative',
-    description: 'Professional jingles, sweepers, and station IDs with fast turnarounds. Access AI and pro voice talent.',
+    name: 'Imaging AI',
+    description: 'Instant jingles and station IDs generated with studio-grade TTS.',
     icon: CreativeIcon,
   },
   {
-    name: 'AI Services',
-    description: 'Auto-DJ, smart scheduling, audio cleaning, AI-assisted composition, and automated content clipping.',
+    name: 'Auto-DJ v3',
+    description: 'Smart scheduling that learns your listeners habits and optimizes rotation.',
     icon: AIIcon,
   },
   {
-    name: 'Monetization Tools',
-    description: 'Dynamic ad insertion, subscription/donation widgets, paywalled streams, and royalty reporting.',
+    name: 'Global Ad Hub',
+    description: 'Dynamic server-side ad insertion with programmatic monetization built-in.',
     icon: MonetizationIcon,
+    className: 'md:col-span-2'
   },
   {
-    name: 'Admin & Operations',
-    description: 'Integrated billing, webhooks for automation, multi-tenant architecture, and white-label options.',
+    name: 'Brand Sites',
+    description: 'High-performance station websites with real-time metadata syncing.',
+    icon: WebsiteIcon,
+  },
+  {
+    name: 'Ops Manager',
+    description: 'Centralized station management for multi-market networks.',
     icon: AdminIcon,
   },
 ];
 
 const Features: React.FC = () => {
   return (
-    <section id="features" className="py-20 bg-gray-900/50">
+    <section id="features" className="py-24 bg-gray-900">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-3xl font-extrabold text-white sm:text-4xl">Everything You Need to Broadcast</h2>
-          <p className="mt-4 text-lg text-gray-400">From hobbyist to enterprise, our toolkit scales with you.</p>
+        <div className="max-w-3xl mb-16">
+          <h2 className="text-[10px] font-black text-primary-400 uppercase tracking-[0.4em] mb-4">The Platform</h2>
+          <p className="text-4xl md:text-5xl font-black text-white leading-tight">
+            Built for those who live to <span className="italic text-gray-500">broadcast.</span>
+          </p>
         </div>
-        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {features.map((feature) => (
-            <div key={feature.name} className="bg-gray-800/50 p-6 rounded-lg border border-gray-700/50 shadow-lg hover:border-primary-500 hover:scale-105 transition-all duration-300">
-              <div className="flex items-center justify-center h-12 w-12 rounded-md bg-primary-600 text-white">
-                <feature.icon className="h-6 w-6" aria-hidden="true" />
+            <div 
+              key={feature.name} 
+              className={`group bg-gray-800/40 p-8 rounded-[2rem] border border-gray-700/50 hover:border-primary-500/50 transition-all duration-500 flex flex-col justify-between overflow-hidden relative ${feature.className || ''}`}
+            >
+              <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-10 transition-opacity transform group-hover:scale-110 duration-700">
+                <feature.icon className="h-32 w-32" />
               </div>
-              <h3 className="mt-5 text-lg font-medium text-white">{feature.name}</h3>
-              <p className="mt-2 text-base text-gray-400">{feature.description}</p>
+              
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center h-12 w-12 rounded-2xl bg-primary-600/10 text-primary-400 border border-primary-500/20 mb-6 group-hover:scale-110 transition-transform">
+                  <feature.icon className="h-6 w-6" />
+                </div>
+                <h3 className="text-xl font-black text-white uppercase tracking-tight mb-2">{feature.name}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed max-w-xs">{feature.description}</p>
+              </div>
+              
+              <div className="mt-8 relative z-10">
+                <button className="text-[10px] font-black text-white uppercase tracking-widest flex items-center group-hover:text-primary-400 transition-colors">
+                  Learn More <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+              </div>
             </div>
           ))}
         </div>
