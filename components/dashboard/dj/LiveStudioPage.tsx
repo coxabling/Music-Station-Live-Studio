@@ -3,13 +3,22 @@ import React, { useState, useEffect, useRef } from 'react';
 import { CalendarIcon, MicrophoneIcon, PlayIcon, StopIcon } from '../../IconComponents';
 import DataTable from '../DataTable';
 
+// Added RequestItem interface for type safety
+interface RequestItem {
+    id: number;
+    track: string;
+    user: string;
+    status: 'Pending' | 'Played' | 'Rejected';
+}
+
 const LiveStudioPage: React.FC = () => {
     const [isOnAir, setIsOnAir] = useState(false);
     const [streamTime, setStreamTime] = useState(0);
     const [listeners, setListeners] = useState(0);
     const timerRef = useRef<number | null>(null);
     const listenerRef = useRef<number | null>(null);
-    const [requestData, setRequestData] = useState([
+    // Properly typed requestData state using the new interface
+    const [requestData, setRequestData] = useState<RequestItem[]>([
         { id: 1, track: 'Blinding Lights - The Weeknd', user: 'Listener23', status: 'Pending' },
         { id: 2, track: 'Levitating - Dua Lipa', user: 'MusicFan88', status: 'Pending' },
         { id: 3, track: 'Good 4 U - Olivia Rodrigo', user: 'RadioHead1', status: 'Played' },
@@ -126,7 +135,8 @@ const LiveStudioPage: React.FC = () => {
                  </div>
 
                  <div className="lg:col-span-1 space-y-8">
-                     <DataTable
+                     {/* Explicitly provide RequestItem generic type to DataTable to resolve renderRow access errors */}
+                     <DataTable<RequestItem>
                         title="Listener Requests"
                         columns={[
                             { key: 'track', header: 'Track' },

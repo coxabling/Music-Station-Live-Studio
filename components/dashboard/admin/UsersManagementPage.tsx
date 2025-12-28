@@ -57,7 +57,8 @@ const UsersManagementPage: React.FC = () => {
                 </button>
             </div>
 
-            <DataTable
+            {/* Added User generic type to DataTable to resolve property inference errors in renderRow */}
+            <DataTable<User>
                 title="All Users"
                 columns={[
                     { key: 'name', header: 'Name' },

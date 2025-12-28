@@ -58,7 +58,8 @@ const StationsManagementPage: React.FC = () => {
             </button>
         </div>
 
-        <DataTable
+        {/* Added Station generic type to DataTable to resolve property inference errors in renderRow */}
+        <DataTable<Station>
             title="All Stations"
             columns={[
                 { key: 'name', header: 'Station Name' },
